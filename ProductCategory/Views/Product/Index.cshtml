@@ -1,0 +1,34 @@
+﻿
+@using (Html.BeginForm())
+{
+    <div ng-app="ProductView" ng-controller="FnProductCat as vm">
+        
+        <label for="searchCategoryId">Select a Product Catogory</label>
+        <select id ="searchCategoryId" class="form-control"
+             ng-model="vm.searchInput.selectedCategory"
+            ng-options="item.CategoryName for item in vm.searchCategories track by CategoryId">
+        </select>
+        <div>
+            <label for="searchProductName" class="form-group">Product Name</label>
+            <input type="text" class="form-control" id="searchProductName" ng-model="vm.searchInput.productName" />
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Product ID</th>
+                    <th>Product Name</th>
+                </tr>
+            </thead>
+            <tr ng-repeat="product in vm.products | filter: vm.searchInput.productName">
+                <td>{{product.ProductId}}</td>
+                <td>{{product.ProductName}}</td>
+            </tr>
+        </table>
+
+    </div>
+}
+     @section scripts{
+         <script src="~/Scripts/angular.js"></script>
+         <script src="/app/App.module.js"></script>
+         <script src="/app/Product.Controller.js"></script>
+                  }
